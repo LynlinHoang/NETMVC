@@ -1,0 +1,37 @@
+﻿@model SV20T1020056.DomainModels.Category
+@{
+
+}
+<div class="box box-primary">
+    <div class="box-body">
+        <form action="~/Category/Delete/@Model.CategoryID" method="post">
+            <div class="form-group">
+                <label>Tên loại hàng:</label>
+                <p class="form-control-static" name="CategoryName">@Model.CategoryName</p>
+            </div>
+            <div class="form-group">
+                <label>Mô tả:</label>
+                <p class="form-control-static" name="Description">@Model.Description</p>
+            </div>
+            <label>Ảnh:</label>
+            <div class="form-group">               
+                    <input type="hidden" name="Photo" value="photo.png" />
+                    <img id="Photo" src="~/images/products/@Model.Photo" class="img img-bordered" style="width:100px" ,height="130px" />
+                
+            </div>
+            <div class="from-group text-right">
+                @if (ViewBag.AllowDelete)
+                {
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fa fa-floppy"> </i>
+                        Xóa dữ liệu
+                    </button>
+                }
+                <a class="btn btn-default" href="~/Category">Quay lại</a>
+            </div>
+           
+        </form>
+    </div>
+</div>
+
+

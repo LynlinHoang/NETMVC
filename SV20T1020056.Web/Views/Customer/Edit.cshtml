@@ -1,0 +1,82 @@
+﻿@model SV20T1020056.DomainModels.Customer
+@{
+
+}
+
+<div class="box box-primary">
+    <div class="box-body">
+        <form action="~/Customer/Save" method="post">
+            <div class="form-group">
+                <input type="hidden" name="CustomerID" value="@Model.CustomerID">
+                    <label>Tên khách hàng:</label>
+               @*  <input type="text" class="form-control" id="#" name="CustomerName" value="@Model.CustomerName"> *@
+                @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Nhập tên khách hàng" })
+                @Html.ValidationMessage(nameof(Model.CustomerName), new{@style="color:#f00"})
+            </div>
+            <div class="form-group">
+                <label>Tên giao dịch:</label>
+                @* <input type="text" class="form-control" id="#" name="ContactName" value="@Model.ContactName"> *@
+                @Html.TextBoxFor(m => m.ContactName, new { @class = "form-control", @autofocus = "autofocus" ,@placeholder = "Nhập tên giao dịch" })
+                @Html.ValidationMessage(nameof(Model.ContactName), new { @style = "color:#f00" })
+            </div>
+            <div class="form-group">
+                <label>Số điện thoại:</label>
+               @*  <input type="text" class="form-control" id="#" name="Phone" value="@Model.Phone"> *@
+                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @autofocus = "autofocus", @placeholder="Nhập số điện thoại" })
+            </div>
+            <div class="form-group">
+               <label>Email:</label>
+                @* <input type="email" class="form-control" id="#" name="Email" value="@Model.Email"> *@
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Nhập Email" })
+                @Html.ValidationMessage(nameof(Model.Email), new { @style = "color:#f00" })
+            </div>
+            <div class="form-group">
+                <label>Địa chỉ:</label>
+               @*  <input type="text" class="form-control" id="#" value="@Model.Address"> *@
+                @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Nhập Email" })
+            </div>
+            <div class="form-group">
+                <label>Tỉnh thành:</label>
+               @*  <select class="form-control" name="Province">
+                    <option value="">--Chọn tỉnh thành--</option>
+                    @foreach(var item in SV20T1020056.BusinessLayers.CommonDataService.ListOfProvinces())
+                    {
+                        if (item.ProvinceName==Model.Province)
+                        {
+                            <option value="@item.ProvinceName" selected>@item.ProvinceName</option>
+                        }
+                        else{
+
+                            <option value="@item.ProvinceName" >@item.ProvinceName</option>
+                        }
+                    }                    
+                </select> *@
+                @Html.DropDownListFor(m => m.Province, SelectlistHelper.Provinces(), new { @class = "form-control select2" })
+                @Html.ValidationMessage(nameof(Model.Province), new { @style = "color:#f00" })
+            </div>
+            <div class="form-group">
+                <label>Trạng thái:</label>
+                @Html.DropDownListFor(m => m.IsLocked,
+                         new SelectList(new List<SelectListItem>
+                {
+                new SelectListItem { Text = "Tài khoản không hoạt động", Value = "true", Selected = Model.IsLocked },
+                new SelectListItem { Text = "Tài khoản đang hoạt động", Value = "false", Selected = !Model.IsLocked }
+                }, "Value", "Text"),
+                         new { @class = "form-control select2" })
+                
+                <div class="from-group">
+                    @Html.ValidationMessage("Error", new { @style = "color:#f00" })
+                </div>
+                
+            </div>
+            <div class="from-group text-right">
+                <button type="submit" class="btn btn-primary"> 
+                    <i class="fa fa-floppy"> </i>
+                    Lưu dữ liệu
+                </button>
+                <a href="~/Customer" class="btn btn-default">Quay lại</a>
+            </div>
+        </form>
+    </div>
+</div>
+

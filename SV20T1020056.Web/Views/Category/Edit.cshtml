@@ -1,0 +1,48 @@
+﻿@model SV20T1020056.DomainModels.Category
+@{
+    
+}
+<div class="box box-primary">
+    <div class="box-body">
+        <form action="~/Category/Save" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="hidden" name="CategoryID" value="@Model.CategoryID">
+            </div>
+            <div class="form-group">
+                <label>Tên loại hàng:</label>
+                @* <input type="text" class="form-control" id="#" name="CategoryName" value="@Model.CategoryName" placeholder="Nhập tên loại hàng"> *@
+                @Html.TextBoxFor(m => m.CategoryName, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Nhập tên loại hàng" })
+                @Html.ValidationMessage(nameof(Model.CategoryName), new { @style = "color:#f00" })
+            </div>
+            <div class="form-group">
+                <label>Mô tả:</label>
+                @* <input type="text" class="form-control" id="#" name="Description" value="@Model.Description" placeholder="Nhập mô tả"> *@
+                @Html.TextBoxFor(m => m.Description, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Nhập mô tả" })
+                @Html.ValidationMessage(nameof(Model.Description), new { @style = "color:#f00" })
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Ảnh cá nhân:</label>
+                <div class="col-sm-10">
+                    <input type="file" name="uploadPhoto" accept="image/*"
+                           onchange="document.getElementById('Photo').src = window.URL.createObjectURL(this.files[0])" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-sm-10">
+                    <input type="hidden" name="Photo" value="@Model.Photo" />
+                    <img id="Photo" src="~/images/category/@Model.Photo" class="img img-bordered" style="width:200px" />
+                </div>
+            </div>
+            <div class="from-group text-right">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-floppy"> </i>
+                    Lưu dữ liệu
+                </button>
+                <a href="~/Category" class="btn btn-default">Quay lại</a>
+            </div>
+        </form>
+    </div>
+</div>
+
